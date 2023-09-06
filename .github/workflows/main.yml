@@ -1,0 +1,20 @@
+name: My GitHub Action
+on:
+  push:
+    branches:
+      - main
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Build code
+        run: |
+          npm install
+          npm run build
+      - name: Deploy code
+        uses: my-deploy-action@v1
+        with:
+          environment: production
+          api_key: ${{ secrets.API_KEY }}
